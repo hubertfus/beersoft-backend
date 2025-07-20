@@ -14,6 +14,11 @@ export const registerSchema = Joi.object({
     lastName: Joi.string().min(3).max(50).required(),
 }).unknown(false);
 
+export const loginSchema = Joi.object({
+    email: Joi.string().email().max(100).required(),
+    password: Joi.string().min(6).max(64).required(),
+}).unknown(false);
+
 export const validate = (schema) => {
     return (req, res, next) => {
         const { error } = schema.validate(req.body, { abortEarly: false });
